@@ -1,0 +1,175 @@
+#тесты библиотеки целочисленной математики СС 2022 г
+import s_int_math_lib
+import math
+errcon = 0
+glec = 0
+aas = [1, 5, 0, 34543, 325, 3234, 678.0, 24, 1, -1, -5, -0, -34543, -3234, -678.0, -24, -1, "strintfd"]
+aass = [1, 5, 0, 325, 678.0, 24, 1, -1, -5, -0, -34543, -3234, -678.0, -24, -1, "strintfd"]
+bbs = [1, 0, 5, 567, "strintfd", 1213.2542, 8, 1, 57, -1, -0, -5, 567, -1213.2542, -8, -1, 57, 89]
+#является целым числом или нет
+print("является целым числом или нет")
+errcon = 0
+for i in range(len(aas)):
+    if(type(aas[i]) == int and s_int_math_lib.s_is_int(aas[i]) == True):
+        print(str(aas[i]) + " - True")
+    elif(type(aas[i]) != int and s_int_math_lib.s_is_int(aas[i]) == False):
+        print(str(aas[i]) + " - True")
+    else:
+        print(str(aas[i]) + " - False")
+        errcon += 1
+glec = glec + errcon
+if(errcon == 0):
+    print("no errors")
+else:
+    print(str(errcon) + " errors")
+
+
+
+#является натуральным числом или нет
+print("является натуральным числом или нет")
+errcon = 0
+for i in range(len(aas)):
+    if(type(aas[i]) == int and aas[i] > 0 and s_int_math_lib.s_is_nat(aas[i]) == True):
+        print(str(aas[i]) + " - True")
+    elif(type(aas[i]) == int and aas[i] <= 0 and s_int_math_lib.s_is_nat(aas[i]) == False):
+        print(str(aas[i]) + " - True")
+    elif(type(aas[i]) != int and s_int_math_lib.s_is_nat(aas[i]) == None):
+        print(str(aas[i]) + " - True")
+    else:
+        print(str(aas[i]) + " - False")
+        errcon += 1
+glec = glec + errcon
+if(errcon == 0):
+    print("no errors")
+else:
+    print(str(errcon) + " errors")
+    
+    
+#является положительным целым числом или нет
+print("является положительным целым числом или нет")
+errcon = 0
+for i in range(len(aas)):
+    if(type(aas[i]) == int and aas[i] >= 0 and s_int_math_lib.s_is_pos_int(aas[i]) == True):
+        print(str(aas[i]) + " - True")
+    elif(type(aas[i]) != int and s_int_math_lib.s_is_pos_int(aas[i]) == None):
+        print(str(aas[i]) + " - True")
+    elif(aas[i] < 0 and s_int_math_lib.s_is_pos_int(aas[i]) == False):
+        print(str(aas[i]) + " - True")
+    else:
+        print(str(aas[i]) + " - False")
+        errcon += 1
+glec = glec + errcon
+if(errcon == 0):
+    print("no errors")
+else:
+    print(str(errcon) + " errors")
+         
+
+#является четным целым числом или нет
+print("является четным целым числом или нет")
+errcon = 0
+for i in range(len(aas)):
+    if(type(aas[i]) == int and aas[i] % 2 == 0 and s_int_math_lib.s_is_even(aas[i]) == True):
+        print(str(aas[i]) + " - True")
+    elif(type(aas[i]) != int and s_int_math_lib.s_is_even(aas[i]) == None):
+        print(str(aas[i]) + " - True")
+    elif(type(aas[i]) == int and aas[i] % 2 != 0 and s_int_math_lib.s_is_even(aas[i]) == False):
+        print(str(aas[i]) + " - True")
+    else:
+        print(str(aas[i]) + " - False")
+        errcon += 1
+glec = glec + errcon
+if(errcon == 0):
+    print("no errors")
+else:
+    print(str(errcon) + " errors")
+    
+    
+#модуль целого числа
+print("модуль целого числа")
+errcon = 0
+for i in range(len(aas)):
+    if(type(aas[i]) == int and abs(aas[i]) == s_int_math_lib.s_abs_int(aas[i])):
+        print(str(aas[i]) + " - True")
+    elif(type(aas[i]) != int and s_int_math_lib.s_abs_int(aas[i]) == None):
+        print(str(aas[i]) + " - True")
+    else:
+        print(str(aas[i]) + " - False")
+        errcon += 1
+glec = glec + errcon
+if(errcon == 0):
+    print("no errors")
+else:
+    print(str(errcon) + " errors")
+    
+    
+#делится ли одно число на другое
+print("делится ли одно число на другое")
+errcon = 0
+for i in range(len(aas)):
+    if((type(aas[i]) == int and type(bbs[i]) == int and aas[i] != 0 and bbs[i] != 0) and aas[i] % bbs[i] == 0 and s_int_math_lib.s_is_div(aas[i], bbs[i]) == True):
+        print(str(aas[i]), str(bbs[i]) + " - True")
+    elif((type(aas[i]) == int and type(bbs[i]) == int and aas[i] != 0 and bbs[i] != 0) and aas[i] % bbs[i] != 0 and s_int_math_lib.s_is_div(aas[i], bbs[i]) == False):
+        print(str(aas[i]), str(bbs[i]) + " - True")
+    elif((type(aas[i]) != int or type(bbs[i]) != int or aas[i] != 0 or bbs[i] != 0) and s_int_math_lib.s_is_div(aas[i], bbs[i]) == None):
+        print(str(aas[i]), str(bbs[i]) + " - True")
+    else:
+        print(str(aas[i]), str(bbs[i]) + " - False")
+        errcon += 1
+glec = glec + errcon
+if(errcon == 0):
+    print("no errors")
+else:
+    print(str(errcon) + " errors")
+    
+    
+#целочисленное умножение одного числа на другое
+print("целочисленное умножение одного числа на другое")
+errcon = 0
+for i in range(len(aas)):
+    if((type(aas[i]) == int and type(bbs[i]) == int) and aas[i] * bbs[i] == s_int_math_lib.s_mult_int(aas[i], bbs[i])):
+        print(str(aas[i]), str(bbs[i]) + " - True")
+    elif((type(aas[i]) != int or type(bbs[i]) != int) and s_int_math_lib.s_mult_int(aas[i], bbs[i]) == None):
+        print(str(aas[i]), str(bbs[i]) + " - True")
+    else:
+        print(str(aas[i]), str(bbs[i]) + " - False")
+        errcon += 1
+glec = glec + errcon
+if(errcon == 0):
+    print("no errors")
+else:
+    print(str(errcon) + " errors")
+    
+    
+#целочисленное деление одного числа на другое
+print("целочисленное деление одного числа на другое")
+errcon = 0
+for i in range(len(aas)):
+    if((type(aas[i]) == int and type(bbs[i]) == int and aas[i] != 0 and bbs[i] != 0) and aas[i] // bbs[i] == s_int_math_lib.s_div_int(aas[i], bbs[i])):
+        print(str(aas[i]), str(bbs[i]) + " - True")
+    elif((type(aas[i]) != int or type(bbs[i]) != int or aas[i] != 0 or bbs[i] != 0) and s_int_math_lib.s_div_int(aas[i], bbs[i]) == None):
+        print(str(aas[i]), str(bbs[i]) + " - True")
+    else:
+        print(str(aas[i]), str(bbs[i]) + " - True")
+glec = glec + errcon
+if(errcon == 0):
+    print("no errors")
+else:
+    print(str(errcon) + " errors")
+    
+ 
+#факториал натурального числа
+print("факториал натурального числа")
+errcon = 0
+for i in range(len(aass)):
+    if((type(aass[i]) == int and aass[i] > 0) and math.factorial(aas[i]) == s_int_math_lib.s_factor_int(aass[i])):
+        print(str(aass[i]) + " - True")
+    elif((type(aass[i]) != int or aass[i] <= 0) and s_int_math_lib.s_factor_int(aass[i]) == None):
+        print(str(aass[i]) + " - True")
+    else:
+        print(str(aass[i]) + " - True")
+glec = glec + errcon
+if(errcon == 0):
+    print("no errors")
+else:
+    print(str(errcon) + " errors")
