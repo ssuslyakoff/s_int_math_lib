@@ -1,0 +1,174 @@
+#библиотека для целочисленной математики СС 2022 г.
+def s_is_int(a):    #является целым числом или нет
+    if(type(a) == int):
+        return True
+    else:
+        return False
+        
+        
+def s_is_nat(a):    #является натуральным числом или нет
+    if(s_is_int(a) == True):
+        if(a > 0):
+            return True
+        else:
+            return False
+    
+    
+def s_is_pos_int(a):    #является положительным целым числом или нет
+    if(s_is_int(a) == True and a >= 0):
+        return True
+    elif(s_is_int(a) == True and a < 0):
+        return False
+    
+    
+def s_is_even(a):      #является четным целым числом или нет
+    if(s_is_int(a) == True):
+        if(a >= 0):
+            while(a > 1):
+                a = a - 2
+            if(a == 0):
+                return True
+            else:
+                return False
+        else:
+            while(a < -1):
+                a = a + 2
+            if(a == 0):
+                return True
+            else:
+                return False
+            
+            
+def s_abs_int(a):    #модуль целого числа
+    if(s_is_int(a) == True and a >= 0):
+        return a
+    elif(s_is_int(a) == True and a < 0):
+        return int(str(a)[1 : ])
+    
+    
+def s_is_div(a, b):    #делится ли одно число на другое
+    if(s_is_int(a) == True and s_is_int(b) == True):
+        if(a != 0 and b != 0 and s_abs_int(a) >= s_abs_int(b)):
+            a = s_abs_int(a)
+            b = s_abs_int(b)
+            while(a >= b):
+                a = a - b
+            if(a == 0):
+                return True
+            else:
+                return False
+        
+        
+def s_mult_int(a, b):    #целочисленное умножение одного числа на другое
+    if(s_is_int(a) == True and s_is_int(b) == True and a != 0 and b != 0):
+        if((a > 0 and b > 0) or (a < 0 and b < 0)):
+            a = s_abs_int(a)
+            b = s_abs_int(b)
+            s = a
+            for i in range(b - 1):
+                a = a + s
+            return a
+        elif((a < 0 and b > 0) or (a > 0 and b < 0)):
+            a = s_abs_int(a)
+            b = s_abs_int(b)
+            s = a
+            for i in range(b - 1):
+                a = a + s
+            return int("-" + str(a))
+    elif(a == 0 or b == 0):
+        return 0
+    
+    
+def s_div_int(a, b):    #целочисленное деление одного числа на другое
+    if(s_is_int(a) == True and s_is_int(b) == True and a != 0 and b != 0):
+        if(s_abs_int(a) < s_abs_int(b)):
+            return 0
+        elif((a > 0 and b > 0) or (a < 0 and b < 0)):
+            a = s_abs_int(a)
+            b = s_abs_int(b)
+            s = 0
+            while(a >= b):
+                a = a - b
+                s = s + 1
+            return s
+        elif((a < 0 and b > 0) or (a > 0 and b < 0)):
+            a = s_abs_int(a)
+            b = s_abs_int(b)
+            s = 0
+            while(a >= b):
+                a = a - b
+                s = s + 1
+            return int("-" + str(s))
+        
+        
+def s_factor_int(a):      #факториал натурального числа
+    if(s_is_int(a) == True and a > 0):
+        s = 1
+        for i in range(1, a + 1):
+            s = s_mult_int(s, i)
+        return s
+    
+def s_fibo_int(a):      #является ли положительное число членом ряда Фибоначчи
+    if(s_is_pos_int(a) == True):
+        s1 = 0
+        s2 = 1
+        s3 = 1
+        while(s1 <= a):
+            if(s3 == a or s2 == a or s1 == a):
+                return True
+            s = s3
+            s3 = s3 + s2
+            s1 = s2
+            s2 = s
+        return False
+    
+    
+def s_pow_int(a, b):      #возведение целого числа в степень
+    if(s_is_int(a) == True and s_is_pos_int(b) == True):
+        if(b == 0):
+            return 1
+        s = a
+        for i in range(b - 1):
+             a = s_mult_int(a, s)
+        return a
+
+
+def s_sqrt_int(a):      #целочисленный квадратный корень из числа
+    if(s_is_int(a) == True):
+        if(a == 0):
+            return 0
+        if(a == 1):
+            return 1
+        for i in range(1, a):
+             if(a == s_pow_int(i, 2)):
+                 return i
+        return None
+    
+
+def s_nok(a, b):        #вычисляет целое наименьшее общее кратное
+    if(a != 0 and b != 0 and s_is_int(a) == True and s_is_int(b) == True):
+        if(a > b):
+            s = a
+        else:
+            s = b
+        while True:
+            if(s_is_div(s, a) == True and s_is_div(s, b) == True):
+                return s
+            s = s + 1
+
+
+def s_nod(a, b):        #вычисляет целый наибольший общий делитель
+    if(s_is_int(a) == True and s_is_int(b) == True):
+        m = 0
+        if(a > b):
+            s = a
+        else:
+            s = b
+        if(a == 0):
+            return b
+        elif(b == 0):
+            return a
+        for i in range(1, s + 1):
+            if(s_is_div(a, i) == True and s_is_div(b, i) == True):
+                m = i
+        return m
